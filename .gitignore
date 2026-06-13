@@ -19,6 +19,7 @@ activeAge-ai-env
 *.secrets_*
 
 # Backups
+bk/
 *_v1.*
 
 # Logs
