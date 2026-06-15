@@ -39,7 +39,7 @@ embeddings_model = HuggingFaceEmbeddings(
 #######################################
 vector_db = Chroma(
     #persist_directory="data/chroma_db", 
-    persist_directory="data/chroma_db_local", 
+    persist_directory="data/chroma_db_df", 
     embedding_function=embeddings_model
 )
 
