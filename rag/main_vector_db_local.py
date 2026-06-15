@@ -18,7 +18,7 @@ embeddings_model = HuggingFaceEmbeddings(
 )
 
 # 3. Create the Vector Store
-persist_directory = "./chroma_db_local"
+persist_directory = "data/chroma_db_local"
 
 # IMPORTANT: Delete your old ./chroma_db folder before running this
 # because you are changing the embedding model.

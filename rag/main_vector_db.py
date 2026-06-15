@@ -36,7 +36,7 @@ embeddings_model = OpenAIEmbeddings(
 #######################################
 # Create the Vector Store with Persistence
 #######################################
-persist_directory = "./chroma_db"
+persist_directory = "data/chroma_db"
 
 vector_db = Chroma.from_documents(
     documents=data,

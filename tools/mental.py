@@ -38,8 +38,8 @@ embeddings_model = HuggingFaceEmbeddings(
 # Point to the vectorDB folder
 #######################################
 vector_db = Chroma(
-    #persist_directory="./chroma_db", 
-    persist_directory="./chroma_db_local", 
+    #persist_directory="data/chroma_db", 
+    persist_directory="data/chroma_db_local", 
     embedding_function=embeddings_model
 )
 

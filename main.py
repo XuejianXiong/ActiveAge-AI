@@ -12,10 +12,10 @@ from langchain_core.messages import SystemMessage
 from langchain_core.messages import ToolMessage
 from langgraph.graph import StateGraph, START, END
 
-from tools_exercise import get_body_exercise
-from tools_mental import get_mental_activity
-from tools_search import get_web_search
-from prompts import return_instructions
+from tools.exercise import get_body_exercise
+from tools.mental import get_mental_activity
+from tools.search import get_web_search
+from core.prompts import return_instructions
 
 load_dotenv('.secrets')
 if not os.environ.get("OPENAI_API_KEY"):

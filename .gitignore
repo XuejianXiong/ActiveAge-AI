@@ -23,6 +23,7 @@ bk/
 *_v1.*
 
 # Logs
+logs/
 *.log
 
 # documents
@@ -30,3 +31,7 @@ bk/
 *.jsonl
 *.htm
 *.txt
+ActiveAge-notes/
+
+# data
+data/chroma_db*
