@@ -116,7 +116,6 @@ ActiveAge-AI/
 │
 ├── services/
 │   ├── exercise_service.py
-│   ├── vector_store.py
 │   └── search_service.py
 │
 ├── tools/
@@ -126,14 +125,20 @@ ActiveAge-AI/
 │
 ├── rag/
 │   ├── build_vector_db_hf.py
-│   └── build_vector_db_openai.py
+│   ├── build_vector_db_openai.py
+│   └── vector_db_builder.py
 │
 ├── data/
 │
 ├── utils/
 │
 ├── app.py
-└── README.md
+├── .secrets
+├── .gitignore
+├── pyproject.toml
+├── SETUP.md
+├── README.md
+└── LICENSE
 ```
 
 ---
@@ -259,6 +264,11 @@ uv sync
 
 Create a `.secrets` file using `.secrest.template`
 
+## Build Local ChromaDB
+
+```
+uv run python -m rag.build_vector_db_hf
+```
 
 ## Launch Application
 
