@@ -1,13 +1,13 @@
 # ActiveAge AI
 
 [![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](https://github.com/XuejianXiong/ActiveAge-AI/releases)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-orange)](https://www.langchain.com/langgraph)
 [![LangChain](https://img.shields.io/badge/LangChain-LLM%20Framework-green)](https://www.langchain.com/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-LLM-412991?logo=openai&logoColor=white)](https://openai.com/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Database-purple)](https://www.trychroma.com/)
 [![RAG](https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-red)]()
 [![Gradio](https://img.shields.io/badge/Gradio-Web%20UI-FF6F00?logo=gradio&logoColor=white)](https://www.gradio.app/)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 [![Agentic AI](https://img.shields.io/badge/Agentic-AI-darkgreen)]()
