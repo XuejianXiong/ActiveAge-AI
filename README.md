@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](https://github.com/XuejianXiong/ActiveAge-AI/releases)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-orange)](https://www.langchain.com/langgraph)
 [![LangChain](https://img.shields.io/badge/LangChain-LLM%20Framework-green)](https://www.langchain.com/)
+[![LangSmith](https://img.shields.io/badge/LangSmith-LLM%20Observability-111827)](https://www.langchain.com/langsmith)
 [![OpenAI](https://img.shields.io/badge/OpenAI-LLM-412991?logo=openai&logoColor=white)](https://openai.com/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Database-purple)](https://www.trychroma.com/)
 [![RAG](https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-red)]()
