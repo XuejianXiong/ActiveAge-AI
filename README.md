@@ -8,8 +8,6 @@
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Database-purple)](https://www.trychroma.com/)
 [![RAG](https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-red)]()
 [![Gradio](https://img.shields.io/badge/Gradio-Web%20UI-FF6F00?logo=gradio&logoColor=white)](https://www.gradio.app/)
-[![Tavily](https://img.shields.io/badge/Tavily-Web%20Search-blue)](https://tavily.com/)
-[![WGER](https://img.shields.io/badge/WGER-Exercise%20API-success)](https://wger.de/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 [![Agentic AI](https://img.shields.io/badge/Agentic-AI-darkgreen)]()
