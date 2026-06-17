@@ -1,64 +1,89 @@
-import os
-from utils.logger import get_logger
-from dotenv import load_dotenv
+from uuid import uuid4
 
-from langchain_core.messages import HumanMessage, AIMessage
 import gradio as gr
 
-from main import get_exercise_chat_agent
+from utils.logger import get_logger
 
-_logs = get_logger(__name__)
+from agents.activeage_agent import get_exercise_chat_agent
 
-load_dotenv('.secrets')
-if not os.environ.get("OPENAI_API_KEY"):
-    raise ValueError("Missing OPENAI_API_KEY environment variable")
+from core.chat import build_langchain_messages, extract_final_output
 
 
-#######################################
-# Run the Model
-#######################################
-agent=get_exercise_chat_agent()
- 
-def exercise_chat(message: str, history: list[dict]) -> str:
+# ============================================================
+# Logging
+# ============================================================
+logger = get_logger(__name__)
 
-    # Keep the last 20 messages
-    MAX_HISTORY = 20
-    history = history[-MAX_HISTORY:]
 
-    langchain_messages = []
-    n = 0
-    print(f"History: {history}")
-    for msg in history:
-        if msg['role'] == 'user':
-            langchain_messages.append(HumanMessage(content=msg['content']))
-        elif msg['role'] == 'assistant':
-            langchain_messages.append(AIMessage(content=msg['content']))
-            n += 1
-    langchain_messages.append(HumanMessage(content=message))
+# ============================================================
+# Agent Initialization
+# ============================================================
+agent = get_exercise_chat_agent()
+
+
+# ============================================================
+# Chat Handler
+# ============================================================
+def exercise_chat(
+    message: str,
+    history: list[dict]
+) -> str:
+    """
+    Handle user interaction and invoke the ActiveAge agent.
+    """
+
+    messages, llm_calls = build_langchain_messages(
+        history=history,
+        user_message=message
+    )
 
     state = {
-        "messages": langchain_messages,
-        "llm_calls": n
+        "messages": messages,
+        "llm_calls": llm_calls
     }
 
     response = agent.invoke(
-                    state, 
-                    config={
-                        "tags": ["production", "senior-user"],
-                        "metadata": {"session_id": "test-session-001"}
-                }
-)
-    return response['messages'][len(response['messages']) - 1].content
+        state,
+        config={
+            "tags": [
+                "activeage",
+                "production"
+            ],
+            "metadata": {
+                "session_id": str(uuid4())
+            }
+        }
+    )
+
+    if response.get("blocked"):
+        return response["final_output"] 
+
+    return extract_final_output(response["messages"])
 
 
-#######################################
-# Open the UI
-#######################################
+# ============================================================
+# Gradio Interface
+# ============================================================
 chat = gr.ChatInterface(
     fn=exercise_chat,
-    type="messages"
+    type="messages",
+    title="ActiveAge AI",
+    description=(
+        "AI assistant built with LangGraph, LangChain, vector databases, "
+        "semantic retrieval, and tool orchestration to deliver personalized "
+        "physical wellness activities, cognitive training exercises, and "
+        "evidence-informed health information."
+    )
 )
 
+
+# ============================================================
+# Application Entry Point
+# ============================================================
 if __name__ == "__main__":
-    _logs.info('Starting Exercise Chat App...')
+
+    logger.info(
+        "Starting ActiveAge AI application..."
+    )
+
     chat.launch()

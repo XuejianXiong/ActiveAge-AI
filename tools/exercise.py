@@ -1,51 +1,60 @@
+from typing import Any
+
 import requests
-import json
-import random
 
 from langchain.tools import tool
 
+from services.exercise_service import (
+    fetch_exercises,
+    select_random_exercise
+)
 
-#######################################
-# Create the Tool
-#######################################
+
+# ============================================================
+# Tool
+# ============================================================
 @tool
-def get_body_exercise():
+def get_body_exercise() -> str:
     """
-    An API call to a body exercise service is made.
-    The API call is to https://wger.de/api/v2/exerciseinfo/.
-    """    
-    
+    Retrieve physical fitness and movement-based activities designed to improve strength, mobility, flexibility, balance, endurance, and overall physical wellness.
+
+    This tool covers ANY request related to improving physical condition, including structured movement, workouts, and training programs.
+
+    Use this tool when the user requests activities involving ANY combination of:
+
+    - body OR physical OR physical fitness OR muscular OR strength OR mobility OR flexibility OR cardio OR endurance
+    AND
+    - exercise OR exercises OR workout OR workouts OR training OR activity OR activities OR practice OR fitness OR movement
+
+    Examples include (but are not limited to):
+    - body exercises
+    - physical exercises
+    - workout routines
+    - body workout
+    - strength training
+    - mobility training
+    - fitness training
+    - cardio workouts
+    - endurance training
+    - stretching exercises
+    - balance training activities
+    - full-body workout routines
+
+    If the request is about improving physical health, movement ability, or fitness through structured activities → use this tool.
+    """
     try:
-          response = get_body_exercise_from_service()
-          exercise = get_body_exercise_from_response(response=response)
-          return exercise
-    except Exception as e:
-        return f"Error fetching exercise: {str(e)}"
+        response_data = fetch_exercises()
 
+        return select_random_exercise(response_data)
 
-#######################################
-# Get the response from the service API
-#######################################
-def get_body_exercise_from_service():
-    url = "https://wger.de/api/v2/exerciseinfo/"
-    params = {
-        "language": 2,  # English
-        "limit": 20
-    }
-    response = requests.get(url, params=params, timeout=5)
-    return response
+    except requests.RequestException as exc:
+        return (
+            f"Unable to retrieve exercise data "
+            f"from the exercise service: {str(exc)}"
+        )
 
-
-#######################################
-# Extract results from the response
-#######################################
-def get_body_exercise_from_response(response:requests.Response) -> str:
-    response.raise_for_status()
-    rep_data = response.json()
-          
-    exercise_list = rep_data.get("results", [])
-    if not exercise_list:
-        return "No exercises found."
-          
-    exercise = random.choice(exercise_list)
-    return json.dumps(exercise)
+    except Exception as exc:
+        return (
+            f"Unexpected error retrieving exercise: "
+            f"{str(exc)}"
+        )

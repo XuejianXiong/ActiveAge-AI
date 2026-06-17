@@ -1,61 +1,75 @@
 import os
-from dotenv import load_dotenv
+from functools import lru_cache
 
 from langchain.tools import tool
-from langchain_openai import OpenAIEmbeddings
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+from core.embeddings import get_embedding_model
+from core.config import RAG_TOP_K
 
 
-load_dotenv('.secrets')
-if not os.environ.get("OPENAI_API_KEY"):
-    raise ValueError("Missing OPENAI_API_KEY environment variable")
-
-
-#######################################
-# Setup the embeddings to use the Gateway 
-#######################################
-'''
-# This is for ChatGPT model
-embeddings_model = OpenAIEmbeddings(
-    openai_api_base='https://k7uffyg03f.execute-api.us-east-1.amazonaws.com/prod/openai/v1',
-    openai_api_key="any value",
-    default_headers={"x-api-key": os.getenv('API_GATEWAY_KEY')},
-    model="text-embedding-3-small"
-)
-'''
-
-# This is for local Gemma model from LM Studio
-embeddings_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
-
-
-#######################################
-# Point to the vectorDB folder
-#######################################
-vector_db = Chroma(
-    #persist_directory="data/chroma_db", 
-    persist_directory="data/chroma_db_local", 
-    embedding_function=embeddings_model
-)
-
-
-#######################################
-# Create the Tool
-#######################################
-@tool
-def get_mental_activity(query: str):
+def create_mental_tool(embedding_provider: str = "hf"):
     """
-    Resolves questions about mental health, mental exercises, or brain exercises 
-    using a semantic search across a curated dataset.
+    Factory function that returns a configured tool.
+    This allows HF or OpenAI embeddings to be injected.
     """
-    docs = vector_db.similarity_search(query, k=3)
-    
-    if not docs:
-        return "I couldn't find a matching mental exercise."
-        
-    return f"Exercise: {docs[0].metadata['Exercise Name']}\nInstructions: {docs[0].page_content}"
+
+    vector_db_path = f"data/chroma_db_{embedding_provider}"
+
+    embeddings = get_embedding_model(embedding_provider)
+
+    @lru_cache(maxsize=1)
+    def get_vector_db():
+        return Chroma(
+            persist_directory=vector_db_path,
+            embedding_function=embeddings
+        )
+
+    @tool
+    def get_mental_activity(query: str) -> str:
+        """
+        Retrieve mental fitness, brain exercises, or cognitive training activities designed to improve brain performance.
+
+        This tool covers ANY request related to improving mental health, including memory, attention, focus, and problem-solving.
+
+        Use this tool when the user requests activities involving ANY combination of:
+
+        - brain OR mental OR cognitive OR memory OR thinking OR focus
+        AND
+        - exercise OR exercises OR training OR workout OR activity OR practice OR fitness OR movement
+
+        Examples include (but are not limited to):
+        - brain exercises
+        - mental exercise
+        - cognitive training
+        - memory training
+        - brain fitness
+        - mental fitness
+        - brain workout
+        - mental workout
+        - cognitive exercises
+        - attention training activities
+        - focus improvement exercises
+
+        If the request is about improving brain function in any structured or activity-based way → use this tool.
+        """
+
+        try:
+            vector_db = get_vector_db()
+
+            docs = vector_db.similarity_search(query, k=RAG_TOP_K)
+
+            if not docs:
+                return "I couldn't find a matching mental exercise."
+
+            best = docs[0]
+
+            return (
+                f"Exercise: {best.metadata.get('Exercise Name', 'Unknown')}\n"
+                f"Instructions: {best.page_content}"
+            )
+
+        except Exception as e:
+            return f"Error retrieving mental activity: {str(e)}"
+
+    return get_mental_activity
