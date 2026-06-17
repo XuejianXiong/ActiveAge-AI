@@ -13,13 +13,21 @@ from langchain_core.messages import ToolMessage
 from langgraph.graph import StateGraph, START, END
 
 from tools.exercise import get_body_exercise
-from tools.mental import get_mental_activity
+from tools.mental import create_mental_tool
 from tools.search import get_web_search
 from core.prompts import return_instructions
+
 
 load_dotenv('.secrets')
 if not os.environ.get("OPENAI_API_KEY"):
     raise ValueError("Missing OPENAI_API_KEY environment variable")
+
+
+EMBEDDING_PROVIDER = "hf"   # "hf" or "openai"
+
+
+get_mental_activity = create_mental_tool(EMBEDDING_PROVIDER)
+
 
 MY_TOOLS = [get_body_exercise, get_mental_activity, get_web_search]
 
