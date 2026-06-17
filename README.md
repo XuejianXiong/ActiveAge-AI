@@ -1,225 +1,301 @@
-# ActiveAge-AI
+# ActiveAge AI
 
-## Enterprise Agentic AI Platform for Personalized Health Intelligence
+## Production-Ready Agentic AI Platform for Personalized Wellness Guidance
 
-ActiveAge-AI is a modular agentic AI platform that combines Retrieval-Augmented Generation (RAG), semantic search, structured API retrieval, and real-time web intelligence into a unified conversational system.
+ActiveAge AI is a modular, production-oriented agentic AI application that delivers personalized physical wellness activities, cognitive training exercises, and evidence-informed health information through a conversational interface.
 
-The platform demonstrates modern enterprise AI architecture patterns, including vector databases, embedding pipelines, multi-tool orchestration, memory-aware workflows, and retrieval-enhanced LLM applications.
+Built with LangGraph, LangChain, Retrieval-Augmented Generation (RAG), vector databases, and tool orchestration, the platform demonstrates modern AI engineering patterns including multi-tool agents, semantic retrieval, guardrails, configurable model backends, and scalable service-oriented architecture.
 
-Originally designed to support healthy aging and wellness guidance, the architecture is domain-agnostic and can be extended to healthcare, research, knowledge management, customer support, and enterprise AI assistant applications.
-
----
-
-## Key Capabilities
-
-### Agentic AI Workflows
-
-ActiveAge-AI uses LangGraph to orchestrate multi-step reasoning and dynamic tool execution.
-
-Capabilities include:
-
-* Context-aware conversations
-* Tool selection and execution
-* Memory-aware interactions
-* Multi-source information retrieval
-* Retrieval-enhanced response generation
-
-The architecture enables the AI system to determine which information source is most appropriate for a given user request and retrieve relevant context before generating a response.
+The project serves as a reference implementation for building production-grade AI assistants that combine structured APIs, vector search, and real-time information retrieval within a unified agent framework.
 
 ---
 
-### Retrieval-Augmented Generation (RAG)
+# Features
 
-The platform implements a semantic retrieval layer using vector embeddings and ChromaDB.
+## Physical Wellness Guidance
 
-Features include:
-
-* Embedding generation using OpenAI embedding models
-* Persistent vector storage
-* Semantic similarity search
-* Context retrieval for LLM grounding
-* Domain-specific knowledge retrieval
-
-This approach reduces hallucinations and improves factual consistency by grounding responses in retrieved content.
-
----
-
-### Hybrid Retrieval Architecture
-
-The system integrates multiple retrieval mechanisms:
-
-| Source Type            | Retrieval Method    | Example Use Cases                   |
-| ---------------------- | ------------------- | ----------------------------------- |
-| Structured Data        | REST APIs           | Exercise recommendations            |
-| Unstructured Knowledge | Vector Search (RAG) | Cognitive wellness activities       |
-| Real-Time Information  | AI Search           | Health news and current information |
-
-This hybrid architecture mirrors modern enterprise AI systems that combine structured, unstructured, and real-time knowledge sources.
-
----
-
-## System Architecture
-
-### Service 1: Structured Knowledge Retrieval
-
-**Technology Stack**
-
-* Wger REST API
-* LangChain Tools
+Provides structured exercise recommendations through integration with external fitness knowledge sources.
 
 Capabilities:
 
 * Exercise discovery
-* Activity recommendations
-* Structured information retrieval
-* Step-by-step instruction generation
+* Mobility and stretching routines
+* Strength and balance activities
+* Step-by-step exercise instructions
+* Structured activity recommendations
 
 ---
 
-### Service 2: Semantic Knowledge Retrieval
+## Cognitive Training and Mental Fitness
 
-**Technology Stack**
-
-* ChromaDB
-* OpenAI Embeddings
-* LangChain Retrieval
-
-Pipeline:
-
-1. Knowledge ingestion
-2. Embedding generation
-3. Vector indexing
-4. Semantic search
-5. Context retrieval
-6. LLM response generation
-
-Features:
-
-* Persistent vector database
-* Embedding reuse
-* Low-latency retrieval
-* Similarity-based search
-
----
-
-### Service 3: Real-Time Knowledge Retrieval
-
-**Technology Stack**
-
-* Tavily Search API
-* LangChain Tool Integration
+Uses Retrieval-Augmented Generation (RAG) to retrieve cognitive training activities from a semantic knowledge base.
 
 Capabilities:
 
-* Live information retrieval
-* Current health insights
+* Brain exercises
+* Memory training activities
+* Attention and focus exercises
+* Problem-solving activities
+* Cognitive wellness recommendations
+
+---
+
+## Real-Time Knowledge Retrieval
+
+Provides access to current information when local knowledge sources are insufficient.
+
+Capabilities:
+
+* Health and wellness news
 * Nutrition information
-* Emerging wellness trends
+* Recent research updates
+* Current fitness trends
+* Time-sensitive information retrieval
 
 ---
 
-## Agent Orchestration Layer
+## Agentic AI Workflow
 
-The orchestration layer is implemented using LangGraph StateGraph.
+The application uses LangGraph to orchestrate reasoning and tool execution.
 
-Core responsibilities:
+Features:
 
-* Conversation state management
-* Tool routing
-* Retrieval coordination
-* Context aggregation
-* Response generation
-
-The graph-based architecture enables scalable expansion of additional tools, retrieval systems, and AI capabilities.
-
----
-
-## Technical Highlights
-
-### Vector Database Engineering
-
-* Persistent ChromaDB deployment
-* Embedding lifecycle management
-* Semantic similarity retrieval
-* Context-aware document retrieval
-
-### AI Pipeline Design
-
-* Modular tool architecture
-* Retrieval pipeline abstraction
-* Data-source independence
-* Extensible service framework
-
-### LLM Engineering
-
-* Prompt orchestration
-* Context grounding
-* Tool-augmented reasoning
-* Retrieval-enhanced generation
-
-### Production-Oriented Design
-
-* Modular codebase
-* Separation of concerns
-* Reusable retrieval components
-* Scalable architecture patterns
-* Extensible agent framework
+* Dynamic tool selection
+* Multi-step workflows
+* Retrieval-aware responses
+* Stateful conversations
+* Configurable routing logic
+* Tool execution tracking
 
 ---
 
-## Technology Stack
+# System Architecture
 
-### AI & LLM Frameworks
+```
+User
+ │
+ ▼
+Gradio Interface
+ │
+ ▼
+LangGraph Agent
+ │
+ ├── Guardrails Layer
+ │
+ ├── Physical Exercise Tool
+ │      └── Wger API
+ │
+ ├── Mental Fitness Tool
+ │      └── ChromaDB + Embeddings
+ │
+ └── Web Search Tool
+        └── Tavily Search
+```
+
+---
+
+# Project Structure
+
+```
+ActiveAge-AI/
+│
+├── agents/
+│   ├── activeage_agent.py
+│   └── state.py
+│
+├── core/
+│   ├── config.py
+│   ├── prompts.py
+│   ├── prompt_builder.py
+│   ├── output_schema.py
+│   ├── guardrails.py
+│   ├── models.py
+│   ├── tool_registry.py
+│   ├── embedding.py
+│   └── chat.py
+│
+├── services/
+│   ├── exercise_service.py
+│   ├── vector_store.py
+│   └── search_service.py
+│
+├── tools/
+│   ├── exercise.py
+│   ├── mental.py
+│   └── search.py
+│
+├── rag/
+│   ├── build_vector_db_hf.py
+│   └── build_vector_db_openai.py
+│
+├── data/
+│
+├── utils/
+│
+├── app.py
+└── README.md
+```
+
+---
+
+# Technology Stack
+
+## AI Frameworks
 
 * LangGraph
 * LangChain
-* OpenAI Models
+* OpenAI Compatible APIs
+* LM Studio
 
-### Retrieval Technologies
+## Retrieval Technologies
 
 * ChromaDB
 * Vector Embeddings
 * Semantic Search
+* Retrieval-Augmented Generation (RAG)
 
-### Data Sources
+## Data Sources
 
-* REST APIs
-* Vector Databases
-* Real-Time Search Systems
+* Wger Exercise API
+* Local Knowledge Base
+* Tavily Search
 
-### Development
+## Application Layer
 
 * Python
+* Gradio
 * Environment-Based Configuration
 * Modular Service Architecture
 
 ---
 
-## Potential Enterprise Applications
+# Production Engineering Features
 
-The architecture can be adapted for:
+## Modular Architecture
 
-* Healthcare AI assistants
-* Clinical knowledge retrieval
-* Research intelligence systems
-* Enterprise knowledge management
-* Customer support copilots
-* Internal AI search platforms
-* Scientific literature assistants
+The application follows clear separation of responsibilities:
+
+* Agent orchestration
+* Tool definitions
+* Service layer integrations
+* Prompt management
+* Guardrails and safety controls
+* Configuration management
 
 ---
 
-## Project Objectives
+## Configurable Model Backends
 
-This project demonstrates practical implementation of:
+Supports multiple model providers through centralized configuration.
+
+Examples:
+
+* OpenAI-compatible endpoints
+* Local LLMs via LM Studio
+* Future cloud-hosted model deployments
+
+---
+
+## Guardrails and Safety Layer
+
+Built-in safety mechanisms help ensure controlled behavior.
+
+Features:
+
+* Pre-LLM request validation
+* Restricted topic detection
+* Safe response routing
+* Out-of-scope handling
+* Emergency escalation responses
+
+---
+
+## Retrieval-Augmented Generation
+
+Mental fitness recommendations are grounded using semantic retrieval.
+
+Pipeline:
+
+1. Data ingestion
+2. Embedding generation
+3. Vector indexing
+4. Similarity search
+5. Context retrieval
+6. Response generation
+
+Benefits:
+
+* Reduced hallucinations
+* Improved consistency
+* Domain-specific knowledge grounding
+
+---
+
+## Tool-Oriented Agent Design
+
+The system separates reasoning from execution.
+
+Available tools:
+
+| Tool                   | Purpose                         |
+| ---------------------- | ------------------------------- |
+| Physical Exercise Tool | Exercise recommendations        |
+| Mental Fitness Tool    | Cognitive activity retrieval    |
+| Web Search Tool        | Real-time information retrieval |
+
+This architecture enables easy expansion with additional tools and services.
+
+---
+
+# Running the Application
+
+## Install Dependencies
+
+```
+uv sync
+```
+
+## Configure Environment
+
+Create a `.secrets` file using `.secrest.template`
+
+
+## Launch Application
+
+```
+uv run app.py
+```
+
+The application will be available locally through the Gradio web interface.
+
+---
+
+# Future Enhancements
+
+Planned improvements include:
+
+* Long-term memory support
+* User personalization
+* Multi-agent collaboration
+* Health document ingestion
+* Clinical knowledge retrieval
+* Cloud deployment
+* Authentication and user management
+* Monitoring and observability dashboards
+
+---
+
+# Purpose
+
+This project demonstrates practical implementation of modern AI engineering concepts including:
 
 * Agentic AI systems
-* Retrieval-Augmented Generation (RAG)
-* Vector database design
-* Embedding pipelines
-* Semantic search architectures
-* Multi-tool orchestration
-* Context-aware conversational AI
-* Enterprise AI system design
+* LangGraph workflows
+* Retrieval-Augmented Generation
+* Vector databases
+* Semantic search
+* Tool orchestration
+* Guardrails and safety systems
+* Production-oriented software architecture
 
-The focus is on building production-oriented AI infrastructure patterns that can serve as the foundation for scalable, retrieval-driven intelligent applications.
+The goal is to showcase how modular AI applications can be designed, deployed, and extended using industry-standard engineering practices.
