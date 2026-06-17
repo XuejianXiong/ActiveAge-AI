@@ -1,5 +1,22 @@
 # ActiveAge AI
 
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](https://github.com/XuejianXiong/ActiveAge-AI/releases)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-orange)](https://www.langchain.com/langgraph)
+[![LangChain](https://img.shields.io/badge/LangChain-LLM%20Framework-green)](https://www.langchain.com/)
+[![LangSmith](https://img.shields.io/badge/LangSmith-LLM%20Observability-111827)](https://www.langchain.com/langsmith)
+[![OpenAI](https://img.shields.io/badge/OpenAI-LLM-412991?logo=openai&logoColor=white)](https://openai.com/)
+[![Gemma](https://img.shields.io/badge/Gemma-Local%20LLM-4285F4)](https://ai.google.dev/gemma)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Database-purple)](https://www.trychroma.com/)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Embeddings-yellow?logo=huggingface&logoColor=black)](https://huggingface.co/)
+[![RAG](https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-red)]()
+[![Agentic AI](https://img.shields.io/badge/Agentic-AI-darkgreen)]()
+[![Semantic Search](https://img.shields.io/badge/Semantic-Search-purple)]()
+[![Guardrails](https://img.shields.io/badge/Safety-Guardrails-red)]()
+[![Gradio](https://img.shields.io/badge/Gradio-Web%20UI-FF6F00?logo=gradio&logoColor=white)](https://www.gradio.app/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+
 ## Production-Ready Agentic AI Platform for Personalized Wellness Guidance
 
 ActiveAge AI is a modular, production-oriented agentic AI application that delivers personalized physical wellness activities, cognitive training exercises, and evidence-informed health information through a conversational interface.
